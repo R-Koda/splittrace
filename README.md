@@ -30,6 +30,14 @@ named `splittrace` on a registry is this project.
 [results/comparison.html](results/comparison.html)、派生元追跡の出力例は
 [results/derived-audit.html](results/derived-audit.html) を開いてください。
 
+## Article & live demo / 紹介記事と公開デモ
+
+- [紹介記事：データを分ける・評価する・公開する。Pythonの小さな確認ツールを3つ作りました](https://ryu-koda.com/blog/python-tools-splittrace-eventscore-notebook/) — Japanese overview of SplitTrace, EventScore Explorer, and Notebook Publish Check.
+- [公開デモをブラウザで開く / Open the live demo](https://ryu-koda.com/articles/python-tools/splittrace-demo.html) — Synthetic data only; no installation required.
+
+公開デモは合成データの出力例です。自分のファイルをアップロードする画面ではありません。
+The hosted demo is a sample report, not a file-upload service.
+
 ## Run without installing anything
 
 Python 3.10+; the core and CLI use only the standard library.
