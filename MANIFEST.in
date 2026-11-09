@@ -1,0 +1,3 @@
+include LICENSE README.md CONTRIBUTING.md SECURITY.md
+recursive-include tests *.py
+recursive-include examples *.csv *.json *.ipynb *.html

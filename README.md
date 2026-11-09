@@ -23,12 +23,33 @@ policy, chronological ordering. Missing metadata is **UNKNOWN**, not a clean bil
 of health. All bundled examples are synthetic; no patient data is included.
 
 **Early prototype:** small manifests only, with no real-user validation yet.
-Not published to PyPI. Install from this repository; do not assume that a package
-named `splittrace` on a registry is this project.
+The distribution name and import name are both `splittrace`.
 
-日本語の試用手順は [PILOT.md](PILOT.md)。実行済みの比較結果は
-[results/comparison.html](results/comparison.html)、派生元追跡の出力例は
-[results/derived-audit.html](results/derived-audit.html) を開いてください。
+日本語の試用手順は [PILOT.md](https://github.com/R-Koda/splittrace/blob/main/PILOT.md)。実行済みの比較結果は
+[results/comparison.html](https://github.com/R-Koda/splittrace/blob/main/results/comparison.html)、派生元追跡の出力例は
+[results/derived-audit.html](https://github.com/R-Koda/splittrace/blob/main/results/derived-audit.html) を開いてください。
+
+## Install from PyPI / pipでインストール
+
+Python 3.10 or later. Create and activate a virtual environment first:
+
+```sh
+python3 -m venv .venv
+```
+
+macOS / Linux: `source .venv/bin/activate`
+
+Windows PowerShell: `.venv\Scripts\Activate.ps1`
+
+```sh
+python -m pip install splittrace
+splittrace --help
+```
+
+The help screen confirms that the command is available. Install only the tools you need.
+[PyPI package](https://pypi.org/project/splittrace/) · [Source and examples](https://github.com/R-Koda/splittrace)
+
+サンプルCSV・Notebookなどはpipでは配置されません。公開デモはブラウザで開けます。自分でサンプルを実行する場合はGitHubの「Code → Download ZIP」で取得・展開し、READMEの相対パスをそのフォルダー内から指定してください。
 
 ## Article & live demo / 紹介記事と公開デモ
 
@@ -191,7 +212,7 @@ proof of independence is implemented. Synthetic tests are not real-user validati
 
 Feedback is welcome from EEG, wearable-sensor and other windowed-signal projects:
 can you supply source IDs/coordinates, and does a provenance path help you fix a
-split? See [CONTRIBUTING.md](CONTRIBUTING.md) and the Japanese [trial guide](PILOT.md).
+split? See [CONTRIBUTING.md](https://github.com/R-Koda/splittrace/blob/main/CONTRIBUTING.md) and the Japanese [trial guide](https://github.com/R-Koda/splittrace/blob/main/PILOT.md).
 
 ## References
 
@@ -204,4 +225,4 @@ dependencies retain their own licenses and are installed separately.
 
 ## License
 
-[MIT](LICENSE). Copyright (c) 2026 Ryu Koda.
+[MIT](https://github.com/R-Koda/splittrace/blob/main/LICENSE). Copyright (c) 2026 Ryu Koda.

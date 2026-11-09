@@ -1,13 +1,13 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "splittrace-prototype"
+name = "splittrace"
 version = "0.1.0"
 description = "Metadata-first audit of derived samples across existing ML splits"
 readme = "README.md"
-license = {file = "LICENSE"}
+license = "MIT"
 authors = [{name = "Ryu Koda"}]
 requires-python = ">=3.10"
 dependencies = []
