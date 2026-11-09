@@ -53,6 +53,7 @@ The help screen confirms that the command is available. Install only the tools y
 
 ## Article & live demo / 紹介記事と公開デモ
 
+- [個別ガイド / SplitTrace：データ分割の混入を派生元から点検する](https://ryu-koda.com/blog/splittrace-data-leakage-check/)
 - [紹介記事：データを分ける・評価する・公開する。Pythonの小さな確認ツールを3つ作りました](https://ryu-koda.com/blog/python-tools-splittrace-eventscore-notebook/) — Japanese overview of SplitTrace, EventScore Explorer, and Notebook Publish Check.
 - [公開デモをブラウザで開く / Open the live demo](https://ryu-koda.com/articles/python-tools/splittrace-demo.html) — Synthetic data only; no installation required.
 
