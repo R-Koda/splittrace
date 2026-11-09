@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "splittrace-prototype"
+version = "0.1.0"
+description = "Metadata-first audit of derived samples across existing ML splits"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Ryu Koda"}]
+requires-python = ">=3.10"
+dependencies = []
+keywords = ["data-leakage", "cross-validation", "eeg", "provenance", "machine-learning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Repository = "https://github.com/R-Koda/splittrace"
+Issues = "https://github.com/R-Koda/splittrace/issues"
+
+[project.scripts]
+splittrace = "splittrace.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

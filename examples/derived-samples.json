@@ -1,0 +1,23 @@
+[
+  {
+    "sample_id": "epoch-01"
+  },
+  {
+    "sample_id": "image-01",
+    "parent_ids": [
+      "epoch-01"
+    ]
+  },
+  {
+    "sample_id": "a",
+    "parent_ids": [
+      "image-01"
+    ]
+  },
+  {
+    "sample_id": "b",
+    "parent_ids": [
+      "epoch-01"
+    ]
+  }
+]

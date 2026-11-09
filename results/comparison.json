@@ -1,0 +1,789 @@
+{
+  "python": "3.14.7",
+  "leakfence": "0.5.0",
+  "numpy": "2.5.4",
+  "dataset": "Synthetic fixtures only; no trained models or real subject data.",
+  "methodology": "Only nearest direct competitor tested. Same available supported metadata; lineage adapter shown separately.",
+  "cases": [
+    {
+      "case": "clean_cross_subject",
+      "expected": "PASS",
+      "splittrace": {
+        "schema_version": 1,
+        "policy": "cross_subject",
+        "lineage_complete": true,
+        "status": "PASS",
+        "folds": [
+          {
+            "fold": "0",
+            "partition_sizes": {
+              "train": 1,
+              "test": 1
+            },
+            "checks": {
+              "sample_identity": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "subject": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "lineage": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "interval": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "chronology": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "SKIP"
+              }
+            }
+          }
+        ],
+        "violation_counts": {
+          "sample_identity": 0,
+          "subject": 0,
+          "lineage": 0,
+          "interval": 0,
+          "chronology": 0
+        },
+        "findings": [],
+        "findings_truncated": false,
+        "limitations": [
+          "Checks declared metadata only; PASS is not proof of absence of all leakage.",
+          "Coordinates must already be mapped to the original recording; no implicit conversion.",
+          "No nested-CV, signal similarity, fitted-preprocessing or target-availability audit.",
+          "Quadratic pair scan: prototype for small manifests, not large-scale production."
+        ]
+      },
+      "leakfence_native_flag": false,
+      "leakfence_reports": [
+        {
+          "ok": true,
+          "subject_overlap_count": 0,
+          "temporal_overlap_rate": 0.0,
+          "max_window_overlap": 0.0,
+          "index_overlap_count": 0,
+          "violations": [],
+          "group_stats": {
+            "train_subjects": [
+              "p1"
+            ],
+            "test_subjects": [
+              "p2"
+            ],
+            "shared_subjects": [],
+            "session_pairs": [],
+            "subject_overlap_count": 0
+          },
+          "temporal_stats": {
+            "pairs": [],
+            "n_pairs": 0,
+            "pairs_truncated": false,
+            "n_train": 1,
+            "n_test": 1,
+            "overlap_rate": 0.0,
+            "max_overlap": 0.0
+          }
+        }
+      ],
+      "note": "Comparable metadata supplied for supported checks; not a global safety certificate."
+    },
+    {
+      "case": "subject_mix",
+      "expected": "FAIL",
+      "splittrace": {
+        "schema_version": 1,
+        "policy": "cross_subject",
+        "lineage_complete": true,
+        "status": "FAIL",
+        "folds": [
+          {
+            "fold": "0",
+            "partition_sizes": {
+              "train": 1,
+              "test": 1
+            },
+            "checks": {
+              "sample_identity": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "subject": {
+                "violations": 1,
+                "unknown_pairs": 0,
+                "status": "FAIL"
+              },
+              "lineage": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "interval": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "chronology": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "SKIP"
+              }
+            }
+          }
+        ],
+        "violation_counts": {
+          "sample_identity": 0,
+          "subject": 1,
+          "lineage": 0,
+          "interval": 0,
+          "chronology": 0
+        },
+        "findings": [
+          {
+            "rule": "subject",
+            "fold": "0",
+            "left": "a",
+            "right": "b",
+            "left_split": "train",
+            "right_split": "test",
+            "evidence": {
+              "subject_id": "p1"
+            }
+          }
+        ],
+        "findings_truncated": false,
+        "limitations": [
+          "Checks declared metadata only; PASS is not proof of absence of all leakage.",
+          "Coordinates must already be mapped to the original recording; no implicit conversion.",
+          "No nested-CV, signal similarity, fitted-preprocessing or target-availability audit.",
+          "Quadratic pair scan: prototype for small manifests, not large-scale production."
+        ]
+      },
+      "leakfence_native_flag": true,
+      "leakfence_reports": [
+        {
+          "ok": false,
+          "subject_overlap_count": 1,
+          "temporal_overlap_rate": 0.0,
+          "max_window_overlap": 0.0,
+          "index_overlap_count": 0,
+          "violations": [
+            {
+              "check": "group_overlap",
+              "message": "1 subject(s) in both train and test: ['p1']",
+              "severity": "error",
+              "details": {
+                "shared_subjects": [
+                  "p1"
+                ]
+              }
+            }
+          ],
+          "group_stats": {
+            "train_subjects": [
+              "p1"
+            ],
+            "test_subjects": [
+              "p1"
+            ],
+            "shared_subjects": [
+              "p1"
+            ],
+            "session_pairs": [],
+            "subject_overlap_count": 1
+          },
+          "temporal_stats": {
+            "pairs": [],
+            "n_pairs": 0,
+            "pairs_truncated": false,
+            "n_train": 1,
+            "n_test": 1,
+            "overlap_rate": 0.0,
+            "max_overlap": 0.0
+          }
+        }
+      ],
+      "note": "Comparable metadata supplied for supported checks; not a global safety certificate."
+    },
+    {
+      "case": "window_overlap",
+      "expected": "FAIL",
+      "splittrace": {
+        "schema_version": 1,
+        "policy": "within_recording_future",
+        "lineage_complete": true,
+        "status": "FAIL",
+        "folds": [
+          {
+            "fold": "0",
+            "partition_sizes": {
+              "train": 1,
+              "test": 1
+            },
+            "checks": {
+              "sample_identity": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "subject": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "SKIP"
+              },
+              "lineage": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "interval": {
+                "violations": 1,
+                "unknown_pairs": 0,
+                "status": "FAIL"
+              },
+              "chronology": {
+                "violations": 1,
+                "unknown_pairs": 0,
+                "status": "FAIL"
+              }
+            }
+          }
+        ],
+        "violation_counts": {
+          "sample_identity": 0,
+          "subject": 0,
+          "lineage": 0,
+          "interval": 1,
+          "chronology": 1
+        },
+        "findings": [
+          {
+            "rule": "interval",
+            "fold": "0",
+            "left": "a",
+            "right": "b",
+            "left_split": "train",
+            "right_split": "test",
+            "evidence": {
+              "recording_id": "r1",
+              "coordinate_system": "original-seconds",
+              "overlap_start": 8,
+              "overlap_end": 10,
+              "overlap_length": 2
+            }
+          },
+          {
+            "rule": "chronology",
+            "fold": "0",
+            "left": "a",
+            "right": "b",
+            "left_split": "train",
+            "right_split": "test",
+            "evidence": {
+              "earlier_split_end": 10,
+              "later_split_start": 8,
+              "recording_id": "r1"
+            }
+          }
+        ],
+        "findings_truncated": false,
+        "limitations": [
+          "Checks declared metadata only; PASS is not proof of absence of all leakage.",
+          "Coordinates must already be mapped to the original recording; no implicit conversion.",
+          "No nested-CV, signal similarity, fitted-preprocessing or target-availability audit.",
+          "Quadratic pair scan: prototype for small manifests, not large-scale production."
+        ]
+      },
+      "leakfence_native_flag": true,
+      "leakfence_reports": [
+        {
+          "ok": false,
+          "subject_overlap_count": 1,
+          "temporal_overlap_rate": 1.0,
+          "max_window_overlap": 0.2,
+          "index_overlap_count": 0,
+          "violations": [
+            {
+              "check": "temporal_overlap",
+              "message": "1 overlapping window pair(s), e.g. [(0, 1)]. 100% of test windows contaminated, worst 20%.",
+              "severity": "error",
+              "details": {
+                "pairs": [
+                  [
+                    0,
+                    1,
+                    0.2
+                  ]
+                ],
+                "n_pairs": 1,
+                "pairs_truncated": false
+              }
+            }
+          ],
+          "group_stats": {
+            "train_subjects": [
+              "p1"
+            ],
+            "test_subjects": [
+              "p1"
+            ],
+            "shared_subjects": [
+              "p1"
+            ],
+            "session_pairs": [],
+            "subject_overlap_count": 1
+          },
+          "temporal_stats": {
+            "pairs": [
+              [
+                0,
+                1,
+                0.2
+              ]
+            ],
+            "n_pairs": 1,
+            "pairs_truncated": false,
+            "n_train": 1,
+            "n_test": 1,
+            "overlap_rate": 1.0,
+            "max_overlap": 0.2
+          }
+        }
+      ],
+      "note": "Comparable metadata supplied for supported checks; not a global safety certificate."
+    },
+    {
+      "case": "clean_future",
+      "expected": "PASS",
+      "splittrace": {
+        "schema_version": 1,
+        "policy": "within_recording_future",
+        "lineage_complete": true,
+        "status": "PASS",
+        "folds": [
+          {
+            "fold": "0",
+            "partition_sizes": {
+              "train": 1,
+              "test": 1
+            },
+            "checks": {
+              "sample_identity": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "subject": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "SKIP"
+              },
+              "lineage": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "interval": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "chronology": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              }
+            }
+          }
+        ],
+        "violation_counts": {
+          "sample_identity": 0,
+          "subject": 0,
+          "lineage": 0,
+          "interval": 0,
+          "chronology": 0
+        },
+        "findings": [],
+        "findings_truncated": false,
+        "limitations": [
+          "Checks declared metadata only; PASS is not proof of absence of all leakage.",
+          "Coordinates must already be mapped to the original recording; no implicit conversion.",
+          "No nested-CV, signal similarity, fitted-preprocessing or target-availability audit.",
+          "Quadratic pair scan: prototype for small manifests, not large-scale production."
+        ]
+      },
+      "leakfence_native_flag": false,
+      "leakfence_reports": [
+        {
+          "ok": true,
+          "subject_overlap_count": 1,
+          "temporal_overlap_rate": 0.0,
+          "max_window_overlap": 0.0,
+          "index_overlap_count": 0,
+          "violations": [],
+          "group_stats": {
+            "train_subjects": [
+              "p1"
+            ],
+            "test_subjects": [
+              "p1"
+            ],
+            "shared_subjects": [
+              "p1"
+            ],
+            "session_pairs": [],
+            "subject_overlap_count": 1
+          },
+          "temporal_stats": {
+            "pairs": [],
+            "n_pairs": 0,
+            "pairs_truncated": false,
+            "n_train": 1,
+            "n_test": 1,
+            "overlap_rate": 0.0,
+            "max_overlap": 0.0
+          }
+        }
+      ],
+      "note": "Comparable metadata supplied for supported checks; not a global safety certificate."
+    },
+    {
+      "case": "derived_same_origin",
+      "expected": "FAIL",
+      "splittrace": {
+        "schema_version": 1,
+        "policy": "cross_subject",
+        "lineage_complete": true,
+        "status": "FAIL",
+        "folds": [
+          {
+            "fold": "0",
+            "partition_sizes": {
+              "train": 1,
+              "test": 1
+            },
+            "checks": {
+              "sample_identity": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "subject": {
+                "violations": 0,
+                "unknown_pairs": 1,
+                "status": "UNKNOWN"
+              },
+              "lineage": {
+                "violations": 1,
+                "unknown_pairs": 0,
+                "status": "FAIL"
+              },
+              "interval": {
+                "violations": 0,
+                "unknown_pairs": 1,
+                "status": "UNKNOWN"
+              },
+              "chronology": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "SKIP"
+              }
+            }
+          }
+        ],
+        "violation_counts": {
+          "sample_identity": 0,
+          "subject": 0,
+          "lineage": 1,
+          "interval": 0,
+          "chronology": 0
+        },
+        "findings": [
+          {
+            "rule": "lineage",
+            "fold": "0",
+            "left": "a",
+            "right": "b",
+            "left_split": "train",
+            "right_split": "test",
+            "evidence": {
+              "ancestor": "epoch-01",
+              "left_path": [
+                "a",
+                "image-01",
+                "epoch-01"
+              ],
+              "right_path": [
+                "b",
+                "epoch-01"
+              ]
+            }
+          }
+        ],
+        "findings_truncated": false,
+        "limitations": [
+          "Checks declared metadata only; PASS is not proof of absence of all leakage.",
+          "Coordinates must already be mapped to the original recording; no implicit conversion.",
+          "No nested-CV, signal similarity, fitted-preprocessing or target-availability audit.",
+          "Quadratic pair scan: prototype for small manifests, not large-scale production."
+        ]
+      },
+      "leakfence_native_flag": false,
+      "leakfence_reports": [
+        {
+          "ok": true,
+          "subject_overlap_count": 0,
+          "temporal_overlap_rate": 0.0,
+          "max_window_overlap": 0.0,
+          "index_overlap_count": 0,
+          "violations": [],
+          "group_stats": null,
+          "temporal_stats": null
+        }
+      ],
+      "note": "Native call can only check shared row indices here; subject/interval metadata absent. Parent graph unsupported. No flag is NOT a clean verdict.",
+      "leakfence_with_manual_source_group_flag": true
+    },
+    {
+      "case": "missing_metadata",
+      "expected": "UNKNOWN",
+      "splittrace": {
+        "schema_version": 1,
+        "policy": "cross_subject",
+        "lineage_complete": true,
+        "status": "UNKNOWN",
+        "folds": [
+          {
+            "fold": "0",
+            "partition_sizes": {
+              "train": 1,
+              "test": 1
+            },
+            "checks": {
+              "sample_identity": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "subject": {
+                "violations": 0,
+                "unknown_pairs": 1,
+                "status": "UNKNOWN"
+              },
+              "lineage": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "interval": {
+                "violations": 0,
+                "unknown_pairs": 1,
+                "status": "UNKNOWN"
+              },
+              "chronology": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "SKIP"
+              }
+            }
+          }
+        ],
+        "violation_counts": {
+          "sample_identity": 0,
+          "subject": 0,
+          "lineage": 0,
+          "interval": 0,
+          "chronology": 0
+        },
+        "findings": [],
+        "findings_truncated": false,
+        "limitations": [
+          "Checks declared metadata only; PASS is not proof of absence of all leakage.",
+          "Coordinates must already be mapped to the original recording; no implicit conversion.",
+          "No nested-CV, signal similarity, fitted-preprocessing or target-availability audit.",
+          "Quadratic pair scan: prototype for small manifests, not large-scale production."
+        ]
+      },
+      "leakfence_native_flag": false,
+      "leakfence_reports": [
+        {
+          "ok": true,
+          "subject_overlap_count": 0,
+          "temporal_overlap_rate": 0.0,
+          "max_window_overlap": 0.0,
+          "index_overlap_count": 0,
+          "violations": [],
+          "group_stats": null,
+          "temporal_stats": null
+        }
+      ],
+      "note": "Native call can only check shared row indices here; subject/interval metadata absent. Parent graph unsupported. No flag is NOT a clean verdict."
+    },
+    {
+      "case": "normal_kfold",
+      "expected": "PASS",
+      "splittrace": {
+        "schema_version": 1,
+        "policy": "cross_subject",
+        "lineage_complete": true,
+        "status": "PASS",
+        "folds": [
+          {
+            "fold": "0",
+            "partition_sizes": {
+              "train": 1,
+              "test": 1
+            },
+            "checks": {
+              "sample_identity": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "subject": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "lineage": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "interval": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "chronology": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "SKIP"
+              }
+            }
+          },
+          {
+            "fold": "1",
+            "partition_sizes": {
+              "train": 1,
+              "test": 1
+            },
+            "checks": {
+              "sample_identity": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "subject": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "lineage": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "interval": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "PASS"
+              },
+              "chronology": {
+                "violations": 0,
+                "unknown_pairs": 0,
+                "status": "SKIP"
+              }
+            }
+          }
+        ],
+        "violation_counts": {
+          "sample_identity": 0,
+          "subject": 0,
+          "lineage": 0,
+          "interval": 0,
+          "chronology": 0
+        },
+        "findings": [],
+        "findings_truncated": false,
+        "limitations": [
+          "Checks declared metadata only; PASS is not proof of absence of all leakage.",
+          "Coordinates must already be mapped to the original recording; no implicit conversion.",
+          "No nested-CV, signal similarity, fitted-preprocessing or target-availability audit.",
+          "Quadratic pair scan: prototype for small manifests, not large-scale production."
+        ]
+      },
+      "leakfence_native_flag": false,
+      "leakfence_reports": [
+        {
+          "ok": true,
+          "subject_overlap_count": 0,
+          "temporal_overlap_rate": 0.0,
+          "max_window_overlap": 0.0,
+          "index_overlap_count": 0,
+          "violations": [],
+          "group_stats": {
+            "train_subjects": [
+              "p1"
+            ],
+            "test_subjects": [
+              "p2"
+            ],
+            "shared_subjects": [],
+            "session_pairs": [],
+            "subject_overlap_count": 0
+          },
+          "temporal_stats": {
+            "pairs": [],
+            "n_pairs": 0,
+            "pairs_truncated": false,
+            "n_train": 1,
+            "n_test": 1,
+            "overlap_rate": 0.0,
+            "max_overlap": 0.0
+          }
+        },
+        {
+          "ok": true,
+          "subject_overlap_count": 0,
+          "temporal_overlap_rate": 0.0,
+          "max_window_overlap": 0.0,
+          "index_overlap_count": 0,
+          "violations": [],
+          "group_stats": {
+            "train_subjects": [
+              "p2"
+            ],
+            "test_subjects": [
+              "p1"
+            ],
+            "shared_subjects": [],
+            "session_pairs": [],
+            "subject_overlap_count": 0
+          },
+          "temporal_stats": {
+            "pairs": [],
+            "n_pairs": 0,
+            "pairs_truncated": false,
+            "n_train": 1,
+            "n_test": 1,
+            "overlap_rate": 0.0,
+            "max_overlap": 0.0
+          }
+        }
+      ],
+      "note": "Comparable metadata supplied for supported checks; not a global safety certificate."
+    }
+  ]
+}

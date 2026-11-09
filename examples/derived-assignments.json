@@ -1,0 +1,12 @@
+[
+  {
+    "sample_id": "a",
+    "split": "train",
+    "fold": "0"
+  },
+  {
+    "sample_id": "b",
+    "split": "test",
+    "fold": "0"
+  }
+]

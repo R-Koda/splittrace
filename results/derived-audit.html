@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SplitTrace audit</title><style>body{font:16px system-ui;max-width:1000px;margin:40px auto;padding:0 20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}h1{font-size:24px}</style><h1>SplitTrace: FAIL</h1><p>Metadata-only audit. PASS does not certify absence of all leakage. This report may contain sample identifiers; review before sharing.</p><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;policy&quot;: &quot;cross_subject&quot;,
+  &quot;lineage_complete&quot;: true,
+  &quot;status&quot;: &quot;FAIL&quot;,
+  &quot;folds&quot;: [
+    {
+      &quot;fold&quot;: &quot;0&quot;,
+      &quot;partition_sizes&quot;: {
+        &quot;train&quot;: 1,
+        &quot;test&quot;: 1
+      },
+      &quot;checks&quot;: {
+        &quot;sample_identity&quot;: {
+          &quot;violations&quot;: 0,
+          &quot;unknown_pairs&quot;: 0,
+          &quot;status&quot;: &quot;PASS&quot;
+        },
+        &quot;subject&quot;: {
+          &quot;violations&quot;: 0,
+          &quot;unknown_pairs&quot;: 1,
+          &quot;status&quot;: &quot;UNKNOWN&quot;
+        },
+        &quot;lineage&quot;: {
+          &quot;violations&quot;: 1,
+          &quot;unknown_pairs&quot;: 0,
+          &quot;status&quot;: &quot;FAIL&quot;
+        },
+        &quot;interval&quot;: {
+          &quot;violations&quot;: 0,
+          &quot;unknown_pairs&quot;: 1,
+          &quot;status&quot;: &quot;UNKNOWN&quot;
+        },
+        &quot;chronology&quot;: {
+          &quot;violations&quot;: 0,
+          &quot;unknown_pairs&quot;: 0,
+          &quot;status&quot;: &quot;SKIP&quot;
+        }
+      }
+    }
+  ],
+  &quot;violation_counts&quot;: {
+    &quot;sample_identity&quot;: 0,
+    &quot;subject&quot;: 0,
+    &quot;lineage&quot;: 1,
+    &quot;interval&quot;: 0,
+    &quot;chronology&quot;: 0
+  },
+  &quot;findings&quot;: [
+    {
+      &quot;rule&quot;: &quot;lineage&quot;,
+      &quot;fold&quot;: &quot;0&quot;,
+      &quot;left&quot;: &quot;a&quot;,
+      &quot;right&quot;: &quot;b&quot;,
+      &quot;left_split&quot;: &quot;train&quot;,
+      &quot;right_split&quot;: &quot;test&quot;,
+      &quot;evidence&quot;: {
+        &quot;ancestor&quot;: &quot;epoch-01&quot;,
+        &quot;left_path&quot;: [
+          &quot;a&quot;,
+          &quot;image-01&quot;,
+          &quot;epoch-01&quot;
+        ],
+        &quot;right_path&quot;: [
+          &quot;b&quot;,
+          &quot;epoch-01&quot;
+        ]
+      }
+    }
+  ],
+  &quot;findings_truncated&quot;: false,
+  &quot;limitations&quot;: [
+    &quot;Checks declared metadata only; PASS is not proof of absence of all leakage.&quot;,
+    &quot;Coordinates must already be mapped to the original recording; no implicit conversion.&quot;,
+    &quot;No nested-CV, signal similarity, fitted-preprocessing or target-availability audit.&quot;,
+    &quot;Quadratic pair scan: prototype for small manifests, not large-scale production.&quot;
+  ]
+}</pre></html>
